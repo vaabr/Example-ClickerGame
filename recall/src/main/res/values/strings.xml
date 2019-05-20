@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Recall</string>
+    <string name="WIP">[WIP]</string>
+    <string name="placeholder">PLACEHOLDER_TEXT</string>
+</resources>
