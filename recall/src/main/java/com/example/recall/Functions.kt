@@ -1,6 +1,8 @@
 package com.example.recall
 
 import android.content.SharedPreferences
+import android.view.View
+import android.widget.TextView
 
 object Functions {
 

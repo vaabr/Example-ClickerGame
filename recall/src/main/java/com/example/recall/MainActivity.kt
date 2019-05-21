@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var money = 0
+    var money = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun updateCounters(){
+    fun increaseMoney(sum: Int) {
+        money += sum
+        updateCounters()
+    }
+
+    fun updateCounters() {
         tv_money.text = formatMoney(money)
         saveData("money", money)
     }

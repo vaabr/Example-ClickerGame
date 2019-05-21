@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_work.*
 
 class WorkFragment : Fragment(), View.OnClickListener {
-    var money = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_work, container, false)
@@ -16,22 +15,18 @@ class WorkFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        //.setOnClickListener(this)
-        money = Functions.loadInt("money")
-        updateCounters()
+        b_work.setOnClickListener(this)
+        (activity as MainActivity).money = Functions.loadInt("money")
     }
 
     override fun onPause() {
         super.onPause()
-        Functions.saveData("money", money)
+        Functions.saveData("money", (activity as MainActivity).money)
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            TODO() -> TODO()
+            b_work -> (activity as MainActivity).increaseMoney(1)
         }
-    }
-
-    private fun updateCounters(){
     }
 }
