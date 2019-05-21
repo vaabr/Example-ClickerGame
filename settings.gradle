@@ -1,1 +1,1 @@
-include ':app', ':fragments', ':recall'
+include ':recall'
