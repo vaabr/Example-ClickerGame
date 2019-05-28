@@ -1,10 +1,13 @@
-package com.example.recall
+package com.example.recall.work
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.recall.Functions
+import com.example.recall.MainActivity
+import com.example.recall.R
 import kotlinx.android.synthetic.main.fragment_work.*
 
 class WorkFragment : Fragment(), View.OnClickListener {

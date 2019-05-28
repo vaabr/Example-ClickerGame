@@ -2,16 +2,17 @@ package com.example.recall
 
 import android.content.Context
 import android.content.res.ColorStateList
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import com.example.recall.Functions.formatMoney
 import com.example.recall.Functions.loadInt
 import com.example.recall.Functions.sPref
 import com.example.recall.Functions.saveData
+import com.example.recall.work.WorkFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         updateCounters()
     }
 
-    fun updateCounters() {
+    private fun updateCounters() {
         tv_money.text = formatMoney(money)
         saveData("money", money)
     }
