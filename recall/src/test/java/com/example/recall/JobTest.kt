@@ -17,23 +17,13 @@ class JobTest {
     }
 
     @Test
-    fun raiseSalary_isCorrectPlus() {
-        val testJob = Job(100, "test")
-        testJob.raiseSalary(25)
-        assertEquals(125, testJob.salary)
-    }
-
-    @Test
-    fun raiseSalary_isCorrectMinus() {
-        val testJob = Job(100, "test")
-        testJob.raiseSalary(-25)
-        assertEquals(75, testJob.salary)
-    }
-
-    @Test
-    fun raiseSalary_isCorrectZero() {
+    fun raiseSalary_isCorrect() {
         val testJob = Job(100, "test")
         testJob.raiseSalary(0)
         assertEquals(100, testJob.salary)
+        testJob.raiseSalary(25)
+        assertEquals(125, testJob.salary)
+        testJob.raiseSalary(-5)
+        assertEquals(118, testJob.salary)
     }
 }
