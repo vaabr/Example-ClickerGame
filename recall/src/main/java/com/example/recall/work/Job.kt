@@ -9,4 +9,8 @@ class Job(var salary: Int, val name: String) {
     fun raiseSalary(percent: Int) {
         salary = salary * (percent + 100) / 100
     }
+
+    fun getInfo(): Array<Any> {
+        return arrayOf(name, salary, isCurrent)
+    }
 }

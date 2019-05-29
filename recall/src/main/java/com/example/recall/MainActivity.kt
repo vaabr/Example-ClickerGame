@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import com.example.recall.Functions.formatMoney
-import com.example.recall.Functions.loadInt
+import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.sPref
 import com.example.recall.Functions.saveData
 import com.example.recall.cars.CarsFragment
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    var money = 0
+    var money: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ib_cars.setOnClickListener(this)
         ib_locations.setOnClickListener(this)
         sPref = getPreferences(Context.MODE_PRIVATE)
-        money = loadInt("money")
+        money = loadLong("money")
         updateCounters()
 
     }
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun increaseMoney(sum: Int) {
+    fun increaseMoney(sum: Long) {
         money += sum
         updateCounters()
     }

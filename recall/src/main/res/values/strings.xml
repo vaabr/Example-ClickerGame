@@ -2,4 +2,7 @@
     <string name="app_name">Recall</string>
     <string name="WIP">[WIP]</string>
     <string name="placeholder">PLACEHOLDER_TEXT</string>
+    <string name="thousands">K</string>
+    <string name="millions">M</string>
+    <string name="billions">B</string>
 </resources>

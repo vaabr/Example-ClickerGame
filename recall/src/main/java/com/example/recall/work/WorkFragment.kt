@@ -19,7 +19,8 @@ class WorkFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         b_work.setOnClickListener(this)
-        (activity as MainActivity).money = Functions.loadInt("money")
+        b_reset.setOnClickListener(this)
+        (activity as MainActivity).money = Functions.loadLong("money")
     }
 
     override fun onPause() {
@@ -29,7 +30,8 @@ class WorkFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v) {
-            b_work -> (activity as MainActivity).increaseMoney(1)
+            b_work -> (activity as MainActivity).increaseMoney(5000000)
+            b_reset -> (activity as MainActivity).money = 0
         }
     }
 }
