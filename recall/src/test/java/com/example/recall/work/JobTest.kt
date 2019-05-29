@@ -1,6 +1,5 @@
-package com.example.recall
+package com.example.recall.work
 
-import com.example.recall.work.Job
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

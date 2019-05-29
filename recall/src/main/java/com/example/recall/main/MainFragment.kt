@@ -1,4 +1,4 @@
-package com.example.recall
+package com.example.recall.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.recall.Functions.loadInt
 import com.example.recall.Functions.saveData
+import com.example.recall.R
 
 class MainFragment : Fragment() {
 

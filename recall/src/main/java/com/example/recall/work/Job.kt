@@ -1,6 +1,7 @@
 package com.example.recall.work
 
 class Job(var salary: Int, val name: String) {
+    var isCurrent = false
     fun plusSalary(num: Int) {
         salary += num
     }

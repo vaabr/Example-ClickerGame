@@ -12,6 +12,12 @@ import com.example.recall.Functions.formatMoney
 import com.example.recall.Functions.loadInt
 import com.example.recall.Functions.sPref
 import com.example.recall.Functions.saveData
+import com.example.recall.cars.CarsFragment
+import com.example.recall.fitness.FitnessFragment
+import com.example.recall.food.FoodFragment
+import com.example.recall.locations.LocationsFragment
+import com.example.recall.main.MainFragment
+import com.example.recall.shop.ShopFragment
 import com.example.recall.work.WorkFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
