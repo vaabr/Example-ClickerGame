@@ -7,6 +7,37 @@ object Functions {
 
     lateinit var sPref: SharedPreferences
 
+    object Money {
+        var money = 0
+        var multiplier = 0
+        fun increaseMoney(amount: Int) {
+            when {
+                amount == 0 -> TODO()
+                amount > 0 -> {
+                    money + amount; convertInc()
+                }
+                amount < 0 -> {
+                    money + amount; convertDec()
+                }
+            }
+
+        }
+
+        fun convertInc() {
+            while (money < 1000) {
+                money %= 1000
+                multiplier++
+            }
+        }
+
+        fun convertDec() {
+            while (money > 0) {
+                money %= 1000
+                multiplier--
+            }
+        }
+    }
+
     fun saveData(name: String, data: Any) {
         val ed = sPref.edit()
         when (data) {
