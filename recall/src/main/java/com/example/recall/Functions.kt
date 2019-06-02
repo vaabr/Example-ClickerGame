@@ -10,32 +10,15 @@ object Functions {
     object Money {
         var money = 0
         var multiplier = 0
-        fun increaseMoney(amount: Int) {
-            when {
-                amount == 0 -> TODO()
-                amount > 0 -> {
-                    money + amount; convertInc()
-                }
-                amount < 0 -> {
-                    money + amount; convertDec()
-                }
-            }
 
+        fun countMultiplier(x: Int): Int{
+            for(g in 1 until abs(x).toString().length){
+                if(g%3==0) multiplier++
+            }
+            return multiplier
         }
 
-        fun convertInc() {
-            while (money < 1000) {
-                money %= 1000
-                multiplier++
-            }
-        }
-
-        fun convertDec() {
-            while (money > 0) {
-                money %= 1000
-                multiplier--
-            }
-        }
+        
     }
 
     fun saveData(name: String, data: Any) {
@@ -53,11 +36,11 @@ object Functions {
         return sPref.getInt(name, 0)
     }
 
-    fun loadBool(name: String): Boolean{
+    fun loadBool(name: String): Boolean {
         return sPref.getBoolean(name, false)
     }
 
-    fun loadString(name: String): String?{
+    fun loadString(name: String): String? {
         return sPref.getString(name, "NO_DATA")
     }
 
@@ -68,10 +51,14 @@ object Functions {
     fun formatMoney(money: Long): String {
         return when (abs(money)) {
             in 0 until 1000 -> ("$money $")
-            in 1000 until 1000000 -> ((money/1000).toString() + "," + ((money/100)%10).toString() + "K $")
-            in 1000000 until 1000000000 -> ((money/1000000).toString() + "," + ((money/100000)%10).toString() + "M $")
-            in 1000000000 until 1000000000000 -> ((money/1000000000).toString() + "," + ((money/100000000)%10).toString() + "B $")
+            in 1000 until 1000000 -> ((money / 1000).toString() + "," + ((money / 100) % 10).toString() + "K $")
+            in 1000000 until 1000000000 -> ((money / 1000000).toString() + "," + ((money / 100000) % 10).toString() + "M $")
+            in 1000000000 until 1000000000000 -> ((money / 1000000000).toString() + "," + ((money / 100000000) % 10).toString() + "B $")
             else -> (money.toString())
         }
+    }
+
+    fun doNothing() {
+        //it actually does nothing
     }
 }
