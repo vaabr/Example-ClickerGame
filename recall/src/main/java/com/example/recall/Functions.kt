@@ -7,20 +7,6 @@ object Functions {
 
     lateinit var sPref: SharedPreferences
 
-    object Money {
-        var money = 0
-        var multiplier = 0
-
-        fun countMultiplier(x: Int): Int{
-            for(g in 1 until abs(x).toString().length){
-                if(g%3==0) multiplier++
-            }
-            return multiplier
-        }
-
-        
-    }
-
     fun saveData(name: String, data: Any) {
         val ed = sPref.edit()
         when (data) {
@@ -59,6 +45,6 @@ object Functions {
     }
 
     fun doNothing() {
-        //it actually does nothing
+        //it literally does nothing
     }
 }
