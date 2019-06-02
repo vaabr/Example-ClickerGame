@@ -1,14 +1,16 @@
 package com.example.recall
 
+import java.util.*
 import kotlin.math.abs
 
 object Money {
     var money = 0
     var multiplier = 0
+    val moneyStack = Stack<Int>()
 
-    fun countMultiplier(x: Int): Int{
+    fun countMultiplier(value: Int): Int{
         var mult = 0
-        for(g in 1 until abs(x).toString().length){
+        for(g in 1 until abs(value).toString().length){
             if(g%3==0) mult++
         }
         return mult
@@ -23,6 +25,14 @@ object Money {
             num /= 1000
         }
         return array
+    }
+
+    fun packToStack(array: Array<Int?>): Stack<Int>{
+        val stack = Stack<Int>()
+        for(i in array.size until 0){
+            stack.push(array[i])
+        }
+        return stack
     }
 
     fun increaseMoney(amount: Int){

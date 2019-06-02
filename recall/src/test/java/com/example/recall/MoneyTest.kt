@@ -2,6 +2,8 @@ package com.example.recall
 
 import com.example.recall.Money.countMultiplier
 import com.example.recall.Money.disassemble
+import com.example.recall.Money.moneyStack
+import com.example.recall.Money.packToStack
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -31,5 +33,29 @@ class MoneyTest {
         assertEquals(700, array[0])
         assertEquals(500, array[1])
         assertEquals(1, array[2])
+    }
+
+    @Test
+    fun moneyStack_isCorrect(){
+        moneyStack.push(1)
+        moneyStack.push(2)
+        moneyStack.push(3)
+        assertEquals(3, moneyStack.pop())
+        assertEquals(2, moneyStack.pop())
+        assertEquals(1, moneyStack.pop())
+    }
+
+    @Test
+    fun packToStack_isCorrect(){
+        val testArray = arrayOf(0,1,2,3,4,5,6,7,8,9)
+        val testNullsArray = arrayOfNulls<Int>(testArray.size)
+        for(i in 0 until testArray.size){
+            testNullsArray[i]=testArray[i]
+        }
+        val testStack = packToStack(testNullsArray)
+        for(i in 0 until testStack.size){
+            assertEquals(i, testStack.pop())
+        }
+        assertEquals(true, testStack.isEmpty())
     }
 }
