@@ -8,6 +8,8 @@ import com.example.recall.Money.getValueFromStack
 import com.example.recall.Money.money
 import com.example.recall.Money.moneyStack
 import com.example.recall.Money.packToStack
+import com.example.recall.Money.stackToArrayList
+import com.example.recall.Money.stackToZero
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.*
@@ -27,6 +29,7 @@ class MoneyTest {
         assertEquals(1, countMultiplier(150000))
         assertEquals(2, countMultiplier(1500000))
         assertEquals(2, countMultiplier(555555555))
+
     }
 
     @Test
@@ -103,7 +106,7 @@ class MoneyTest {
     @Test
     fun getValueFromEmptyStack_Test(){
         var value = 15700
-        var testStack: Stack<Int>
+        val testStack: Stack<Int>
         val array = disassemble(value)
         assertEquals(700, array[0])
         assertEquals(15, array[1])
@@ -112,5 +115,30 @@ class MoneyTest {
         assertEquals(15, testStack.peek())
         value = testStack.peek()
         assertEquals(15, value)
+    }
+
+    @Test
+    fun stackToZero_isCorrect(){
+        val testStack = Stack<Int>()
+        stackToZero(testStack)
+        assertEquals(0, testStack.peek())
+        testStack.push(5)
+        assertEquals(5, testStack.pop())
+        assertEquals(0, testStack.pop())
+        assertEquals(true, testStack.isEmpty())
+    }
+
+    @Test
+    fun stackToArrayList_isCorrect(){
+        val testStack = Stack<Int>()
+        val testArrayList = ArrayList<Int>()
+        testStack.push(1)
+        testStack.push(2)
+        testStack.push(3)
+        stackToArrayList(testStack, testArrayList)
+        assertEquals(1, testArrayList[0])
+        assertEquals(2, testArrayList[1])
+        assertEquals(3, testArrayList[2])
+        assertEquals(true, testStack.isEmpty())
     }
 }
