@@ -67,14 +67,4 @@ object Money {
         }
     }
 
-    //broken
-    fun stackToArrayList(stack: Stack<Int>, arrayList: ArrayList<Int>) {
-        if (arrayList.isNotEmpty()) arrayList.clear()
-        for(i in (stack.size-1)..0) {
-            arrayList[i] = stack.pop()
-        }
-    }
-
-
-
 }
