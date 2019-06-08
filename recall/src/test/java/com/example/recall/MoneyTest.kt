@@ -8,7 +8,6 @@ import com.example.recall.Money.getValueFromStack
 import com.example.recall.Money.money
 import com.example.recall.Money.moneyStack
 import com.example.recall.Money.packToStack
-import com.example.recall.Money.stackToArrayList
 import com.example.recall.Money.stackToZero
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -125,20 +124,6 @@ class MoneyTest {
         testStack.push(5)
         assertEquals(5, testStack.pop())
         assertEquals(0, testStack.pop())
-        assertEquals(true, testStack.isEmpty())
-    }
-
-    @Test
-    fun stackToArrayList_isCorrect(){
-        val testStack = Stack<Int>()
-        val testArrayList = ArrayList<Int>()
-        testStack.push(1)
-        testStack.push(2)
-        testStack.push(3)
-        stackToArrayList(testStack, testArrayList)
-        assertEquals(1, testArrayList[0])
-        assertEquals(2, testArrayList[1])
-        assertEquals(3, testArrayList[2])
         assertEquals(true, testStack.isEmpty())
     }
 }
