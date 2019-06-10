@@ -5,5 +5,5 @@ import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 object Money {
-    
+
 }
