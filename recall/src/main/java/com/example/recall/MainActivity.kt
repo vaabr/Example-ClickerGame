@@ -8,10 +8,10 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
-import com.example.recall.Functions.formatMoney
 import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.sPref
 import com.example.recall.Functions.saveData
+import com.example.recall.Money.format
 import com.example.recall.cars.CarsFragment
 import com.example.recall.fitness.FitnessFragment
 import com.example.recall.food.FoodFragment
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateCounters() {
-        tv_money.text = formatMoney(money)
+        tv_money.text = format(money)
         saveData("money", money)
     }
 

@@ -1,12 +1,18 @@
 package com.example.recall
 
 import android.content.SharedPreferences
-import kotlin.math.abs
 
 object Functions {
+    const val longMax: Long = 9223372036854775807 //to do not google variable ranges
+    const val longMin: Long = -9223372036854775807
+    const val intMax: Int = 2147483647
+    const val intMin: Int = -2147483648
+    const val shortMax: Short = 32767
+    const val shortMin: Short = -32768
+    const val byteMax: Byte = 127
+    const val byteMin: Byte = -128
 
     lateinit var sPref: SharedPreferences
-
     fun saveData(name: String, data: Any) {
         val ed = sPref.edit()
         when (data) {
@@ -34,15 +40,6 @@ object Functions {
         return sPref.getLong(name, 0)
     }
 
-    fun formatMoney(money: Long): String {
-        return when (abs(money)) {
-            in 0 until 1000 -> ("$money $")
-            in 1000 until 1000000 -> ((money / 1000).toString() + "," + ((money / 100) % 10).toString() + "K $")
-            in 1000000 until 1000000000 -> ((money / 1000000).toString() + "," + ((money / 100000) % 10).toString() + "M $")
-            in 1000000000 until 1000000000000 -> ((money / 1000000000).toString() + "," + ((money / 100000000) % 10).toString() + "B $")
-            else -> (money.toString())
-        }
-    }
 
     fun doNothing() {
         //it literally does nothing

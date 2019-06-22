@@ -1,10 +1,12 @@
 package com.example.recall
 
-import com.example.recall.Money.stackToList
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.*
 
 class MoneyTest {
-
+    @Test
+    fun test(){
+        Money.notEnough()
+        assertEquals(0,0)
+    }
 }
