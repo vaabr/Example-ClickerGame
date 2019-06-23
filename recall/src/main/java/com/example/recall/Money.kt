@@ -2,12 +2,13 @@ package com.example.recall
 
 import android.util.Log
 import com.example.recall.Functions.longMax
+import com.example.recall.Functions.longMin
 import kotlin.math.abs
+import kotlin.math.pow
 
 object Money {
     var amount: Long = 0 //main variable for money count
     var last: Long = 0 //saved money amount before operation
-    var notEnough: Boolean = false
 
     fun set(number: Long) { //to set money for e.g. when loading from memory
         logS()
@@ -16,41 +17,42 @@ object Money {
         logE()
     }
 
-    fun increase(number: Long) { //to increase in case of e.g. salary or decrease when e.g. buying something
+    fun increase(number: Int) { //to increase in case of e.g. salary or decrease when e.g. buying something
         logS()
         saveLast()
+        number.toLong()
         when {
-            (amount + number) > longMax -> set(longMax)
-            (amount + number) > 0 -> set(amount + number)
-            else -> notEnough() //just additional safe thing
+            ((amount + number) == (longMin + number - 2)) -> set(longMax)
+            else -> set(amount + number)
         }
         logE()
     }
 
-    fun saveLast() {
+    private fun saveLast() {
         logS()
         last = amount //just to save money count before transaction
         logE()
     }
 
-    fun isEnough(number: Long): Boolean { //to check if it's enough money to e.g. buy something
-        return amount >= number
-    }
-
-    fun notEnough() { //to change status
+    fun format(): String { //to format money before displaying it in textview. Parameters letter according for this - https://idlechampions.gamepedia.com/Large_number_abbreviations
         logS()
-        notEnough = true
+        val ten = 10F
+        val sign = "$"
+        fun ten(x: Int) = ten.pow(x).toInt()
+        fun returning(x: Int,letter: String, symbol: String) = ((amount / ten(x)).toString() + "," + ((amount / ten(x-1)) % 10).toString() + "$letter $symbol")
+        fun range(x: Int) = ten(x) until ten(x+3)
         logE()
-    }
-
-    fun format(money: Long): String =  //to format money before displaying it in textview
-        when (abs(money)) {
-            in 0 until 1000 -> ("$money $")
-            in 1000 until 1000000 -> ((money / 1000).toString() + "," + ((money / 100) % 10).toString() + "K $")
-            in 1000000 until 1000000000 -> ((money / 1000000).toString() + "," + ((money / 100000) % 10).toString() + "M $")
-            in 1000000000 until 1000000000000 -> ((money / 1000000000).toString() + "," + ((money / 100000000) % 10).toString() + "B $")
-            else -> (money.toString())
+        return when (abs(amount)) {
+            in 0 until ten(3) -> ("$amount $")
+            in range(3) -> returning(3, "K", sign)
+            in range(6) -> returning(6, "M", sign)
+            in range(9) -> returning(9, "B", sign)
+            in range(12) -> returning(12, "t", sign)
+            in range(15) -> returning(15, "q", sign)
+            in range(18) -> returning(18, "Q", sign)
+            else -> (amount.toString())
         }
+    }
 
     private fun logS() { //logs a function starting
         val name = Throwable().stackTrace[1].methodName
@@ -60,7 +62,7 @@ object Money {
         if (BuildConfig.DEBUG) println("$tM: $name$ending")
     }
 
-    private fun logE(){ //logs a function ending
+    private fun logE() { //logs a function ending
         val name = Throwable().stackTrace[1].methodName
         val tM: String = "MoneyObject" //Log tag for Money object
         val ending: String = " function ends"

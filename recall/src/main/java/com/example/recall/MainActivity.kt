@@ -12,6 +12,7 @@ import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.sPref
 import com.example.recall.Functions.saveData
 import com.example.recall.Money.format
+import com.example.recall.Money.increase
 import com.example.recall.cars.CarsFragment
 import com.example.recall.fitness.FitnessFragment
 import com.example.recall.food.FoodFragment
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    var money: Long = 0
+    //var money: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ib_cars.setOnClickListener(this)
         ib_locations.setOnClickListener(this)
         sPref = getPreferences(Context.MODE_PRIVATE)
-        money = loadLong("money")
+        //money = loadLong("money")
         updateCounters()
 
     }
@@ -56,14 +57,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun increaseMoney(sum: Long) {
-        money += sum
+    fun increaseMoney(sum: Int) {
+        increase(sum)
+        updateCounters()
+    }
+
+    fun resetMoney(){
+        Money.set(0)
         updateCounters()
     }
 
     private fun updateCounters() {
-        tv_money.text = format(money)
-        saveData("money", money)
+        tv_money.text = format()
+        //saveData("money", money)
     }
 
     private fun buttonEffect(button: ImageButton) {
@@ -87,6 +93,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onPause() {
         super.onPause()
-        saveData("money", money)
+        //saveData("money", money)
     }
 }
