@@ -1,10 +1,14 @@
-package com.example.recall
+package com.example.recall.work
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.recall.Functions
+import com.example.recall.MainActivity
+import com.example.recall.Money
+import com.example.recall.R
 import kotlinx.android.synthetic.main.fragment_work.*
 
 class WorkFragment : Fragment(), View.OnClickListener {
@@ -16,17 +20,19 @@ class WorkFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         b_work.setOnClickListener(this)
-        (activity as MainActivity).money = Functions.loadInt("money")
+        b_reset.setOnClickListener(this)
+        //(activity as MainActivity).money = Functions.loadLong("money")
     }
 
     override fun onPause() {
         super.onPause()
-        Functions.saveData("money", (activity as MainActivity).money)
+        //Functions.saveData("money", (activity as MainActivity).money)
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            b_work -> (activity as MainActivity).increaseMoney(1)
+            b_work -> (activity as MainActivity).increaseMoney(500)
+            b_reset -> (activity as MainActivity).resetMoney()
         }
     }
 }
