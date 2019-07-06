@@ -8,9 +8,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
-import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.sPref
-import com.example.recall.Functions.saveData
 import com.example.recall.Money.format
 import com.example.recall.Money.increase
 import com.example.recall.cars.CarsFragment
@@ -22,39 +20,32 @@ import com.example.recall.shop.ShopFragment
 import com.example.recall.work.WorkFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    //var money: Long = 0
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setFragment(MainFragment())
-        ib_main.setOnClickListener(this)
-        ib_work.setOnClickListener(this)
-        ib_food.setOnClickListener(this)
-        ib_shop.setOnClickListener(this)
-        ib_fitness.setOnClickListener(this)
-        ib_cars.setOnClickListener(this)
-        ib_locations.setOnClickListener(this)
+        initializeOnClickListeners()
         sPref = getPreferences(Context.MODE_PRIVATE)
-        //money = loadLong("money")
+        Money.load()
         updateCounters()
-
     }
 
-    override fun onClick(v: View?) {
+    private fun initializeOnClickListeners() {
+        ib_main.setOnClickListener { menuButton(MainFragment(), it) }
+        ib_work.setOnClickListener { menuButton(WorkFragment(), it) }
+        ib_food.setOnClickListener { menuButton(FoodFragment(), it) }
+        ib_shop.setOnClickListener { menuButton(ShopFragment(), it) }
+        ib_fitness.setOnClickListener { menuButton(FitnessFragment(), it) }
+        ib_cars.setOnClickListener { menuButton(CarsFragment(), it) }
+        ib_locations.setOnClickListener { menuButton(LocationsFragment(), it) }
+    }
+
+    private fun menuButton(fragment: Fragment, button: View) {
         updateCounters()
-        if (v is ImageButton) buttonEffect(v)
-        when (v) {
-            ib_main -> setFragment(MainFragment())
-            ib_work -> setFragment(WorkFragment())
-            ib_food -> setFragment(FoodFragment())
-            ib_shop -> setFragment(ShopFragment())
-            ib_fitness -> setFragment(FitnessFragment())
-            ib_cars -> setFragment(CarsFragment())
-            ib_locations -> setFragment(LocationsFragment())
-        }
+        buttonEffect(button)
+        setFragment(fragment)
     }
 
     fun increaseMoney(sum: Int) {
@@ -62,17 +53,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         updateCounters()
     }
 
-    fun resetMoney(){
+    fun resetMoney() {
         Money.set(0)
         updateCounters()
     }
 
-    private fun updateCounters() {
+    fun updateCounters() {
         tv_money.text = format()
-        //saveData("money", money)
     }
 
-    private fun buttonEffect(button: ImageButton) {
+    private fun buttonEffect(button: View) {
         val buttonsArray = arrayOf(ib_main, ib_work, ib_food, ib_shop, ib_fitness, ib_cars, ib_locations)
         for (x in 0 until buttonsArray.size) {
             buttonsArray[x].setBackgroundColor(getColor(R.color.colorBackgroundDark))
@@ -82,7 +72,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             )
         }
         button.setBackgroundColor(getColor(R.color.colorBackgroundLight))
-        ImageViewCompat.setImageTintList(button, ColorStateList.valueOf(getColor(R.color.colorBackgroundDark)))
+        ImageViewCompat.setImageTintList(
+            button as ImageButton,
+            ColorStateList.valueOf(getColor(R.color.colorBackgroundDark))
+        )
     }
 
     private fun setFragment(fragment: Fragment) {
@@ -93,6 +86,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onPause() {
         super.onPause()
-        //saveData("money", money)
+        Money.save()
     }
 }

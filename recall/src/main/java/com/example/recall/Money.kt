@@ -1,14 +1,29 @@
 package com.example.recall
 
+import android.app.Activity
 import android.util.Log
+import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.longMax
 import com.example.recall.Functions.longMin
+import com.example.recall.Functions.saveData
 import kotlin.math.abs
 import kotlin.math.pow
 
 object Money {
     var amount: Long = 0 //main variable for money count
     var last: Long = 0 //saved money amount before operation
+    private const val amountSaveName: String = "moneyAmountL"
+    private const val lastSaveName: String = "moneyLastL"
+
+    fun save() {
+        saveData(amountSaveName, amount)
+        saveData(lastSaveName, last)
+    }
+
+    fun load() {
+        amount = loadLong(amountSaveName)
+        last = loadLong(lastSaveName)
+    }
 
     fun set(number: Long) { //to set money for e.g. when loading from memory
         logS()
@@ -39,8 +54,10 @@ object Money {
         val ten = 10F
         val sign = "$"
         fun ten(x: Int) = ten.pow(x).toInt()
-        fun returning(x: Int,letter: String, symbol: String) = ((amount / ten(x)).toString() + "," + ((amount / ten(x-1)) % 10).toString() + "$letter $symbol")
-        fun range(x: Int) = ten(x) until ten(x+3)
+        fun returning(x: Int, letter: String, symbol: String) =
+            ((amount / ten(x)).toString() + "," + ((amount / ten(x - 1)) % 10).toString() + "$letter $symbol")
+
+        fun range(x: Int) = ten(x) until ten(x + 3)
         logE()
         return when (abs(amount)) {
             in 0 until ten(3) -> ("$amount $")
