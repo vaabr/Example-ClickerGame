@@ -1,6 +1,5 @@
 package com.example.recall
 
-import android.app.Activity
 import android.util.Log
 import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.longMax

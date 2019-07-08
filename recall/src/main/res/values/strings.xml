@@ -1,8 +1,21 @@
 <resources>
-    <string name="app_name">Recall</string>
-    <string name="WIP">[WIP]</string>
-    <string name="placeholder">PLACEHOLDER_TEXT</string>
-    <string name="thousands">K</string>
-    <string name="millions">M</string>
-    <string name="billions">B</string>
+    <!--MAIN-->
+    <string name="s_app_name">Recall</string>
+    <string name="t_WIP">[WIP]</string>
+    <string name="t_money">%1$s,%2#s $</string>
+    <string name="t_placeholder">PLACEHOLDER_TEXT</string>
+    <string name="c_thousands">K</string>
+    <string name="c_millions">M</string>
+    <string name="c_billions">B</string>
+    <!--WORK-->
+    <string name="b_work">work</string>
+    <string name="B_reset">reset</string>
+    <string name="t_salary">Salary: %1$s $</string>
+    <string name="t_job">Job: %1$s</string>
+    <string name="t_level">Level: %1$s</string>
+    <string name="t_skills">Skills: %1$s</string>
+    <string name="b_talk_to">talk to...</string>
+    <!--JOBS-->
+    <string name="tj_beggar">beggar</string>
+    <string name="tj_janitor">janitor</string>
 </resources>

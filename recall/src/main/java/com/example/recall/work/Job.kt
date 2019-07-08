@@ -1,16 +1,38 @@
 package com.example.recall.work
 
-class Job(var salary: Int, val name: String) {
+class Job(val salary: Int, val name: String) {
     var isCurrent = false
+    var level = 1
+    var payment = salary
+
     fun plusSalary(num: Int) {
-        salary += num
+        payment += num
     }
 
     fun raiseSalary(percent: Int) {
-        salary = salary * (percent + 100) / 100
+        payment = salary * (percent + 100) / 100
     }
 
     fun getInfo(): Array<Any> {
         return arrayOf(name, salary, isCurrent)
     }
+
+    fun levelUp() {
+        level++
+        updateSalary()
+    }
+
+    fun setLvl(newLevel: Int) {
+        level = newLevel
+        updateSalary()
+    }
+
+    fun updateSalary() {
+        payment = (salary + (salary * 0.01 * level)).toInt()
+    }
+
+    fun makeCurrent() {
+        isCurrent = true
+    }
+
 }

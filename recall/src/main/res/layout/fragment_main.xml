@@ -6,7 +6,7 @@
                                                    android:layout_height="match_parent">
 
     <TextView
-            android:text="@string/WIP"
+            android:text="@string/t_WIP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView" android:layout_marginEnd="176dp" app:layout_constraintEnd_toEndOf="parent"
