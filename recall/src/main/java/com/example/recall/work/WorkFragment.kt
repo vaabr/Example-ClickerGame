@@ -18,29 +18,20 @@ class WorkFragment : Fragment() {
     private lateinit var jobArray: Array<Job>
     private lateinit var defaultJob: Job
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_work, container, false)
     }
 
     override fun onStart() {
         super.onStart()
-        beggar = Job(1, getString(R.string.tj_beggar))
-        janitor = Job(5, getString(R.string.tj_janitor))
+        beggar = Job(1, getString(R.string.tj_beggar).capitalize(), getString(R.string.tjd_beggar))
+        janitor = Job(5, getString(R.string.tj_janitor).capitalize(), getString(R.string.tjd_janitor))
         jobArray = arrayOf(beggar, janitor)
         defaultJob = beggar
         b_reset.setOnClickListener { (activity as MainActivity).resetMoney() }
         b_work.setOnClickListener { (activity as MainActivity).increaseMoney(findCurrentJob().payment) }
         initializeJobInfo()
     }
-
-    /*private val beggar = Job(1, getString(R.string.tj_beggar))
-    private val janitor = Job(5, getString(R.string.tj_janitor))
-    private val jobArray = arrayOf(beggar)
-    private val defaultJob = beggar*/
 
     private fun initializeJobInfo() {
         val currentJob = findCurrentJob()

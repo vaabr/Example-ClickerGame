@@ -1,6 +1,6 @@
 package com.example.recall.work
 
-class Job(val salary: Int, val name: String) {
+class Job(val salary: Int, val name: String, val description: String) {
     var isCurrent = false
     var level = 1
     var payment = salary
@@ -14,7 +14,7 @@ class Job(val salary: Int, val name: String) {
     }
 
     fun getInfo(): Array<Any> {
-        return arrayOf(name, salary, isCurrent)
+        return arrayOf(name, salary, description, isCurrent)
     }
 
     fun levelUp() {
