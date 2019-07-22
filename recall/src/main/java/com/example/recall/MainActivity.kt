@@ -3,11 +3,13 @@ package com.example.recall
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.recall.Functions.sPref
 import com.example.recall.Money.format
 import com.example.recall.Money.increase
@@ -16,20 +18,25 @@ import com.example.recall.fitness.FitnessFragment
 import com.example.recall.food.FoodFragment
 import com.example.recall.locations.LocationsFragment
 import com.example.recall.main.MainFragment
+import com.example.recall.settings.SettingsFragment
 import com.example.recall.shop.ShopFragment
 import com.example.recall.work.WorkFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val fManager = supportFragmentManager
+    private val lastFragment = MainFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setFragment(MainFragment())
+        //setLastFragment()  // set starting fragment - in future will set last opened fragment instead of Main
         initializeOnClickListeners()
-        sPref = getPreferences(Context.MODE_PRIVATE)
+        ib_main.performClick()
+        sPref = getPreferences(Context.MODE_PRIVATE) // TODO - use room instead of SP
         Money.load()
-        updateCounters()
+        updateCounters() // TODO - add react to the money variable changes
     }
 
     private fun initializeOnClickListeners() {
@@ -40,12 +47,16 @@ class MainActivity : AppCompatActivity() {
         ib_fitness.setOnClickListener { menuButton(FitnessFragment(), it) }
         ib_cars.setOnClickListener { menuButton(CarsFragment(), it) }
         ib_locations.setOnClickListener { menuButton(LocationsFragment(), it) }
+        ib_settings.setOnClickListener { menuButton(SettingsFragment(), it) }
     }
 
     private fun menuButton(fragment: Fragment, button: View) {
-        updateCounters()
         buttonEffect(button)
         setFragment(fragment)
+    }
+
+    private fun setLastFragment() {
+        setFragment(lastFragment) // TODO - return last displayed fragment instead of Main
     }
 
     fun increaseMoney(sum: Int) {
@@ -58,12 +69,12 @@ class MainActivity : AppCompatActivity() {
         updateCounters()
     }
 
-    fun updateCounters() {
+    private fun updateCounters() {
         tv_money.text = format()
     }
 
     private fun buttonEffect(button: View) {
-        val buttonsArray = arrayOf(ib_main, ib_work, ib_food, ib_shop, ib_fitness, ib_cars, ib_locations)
+        val buttonsArray = arrayOf(ib_main, ib_work, ib_food, ib_shop, ib_fitness, ib_cars, ib_locations, ib_settings)
         for (x in 0 until buttonsArray.size) {
             buttonsArray[x].setBackgroundColor(getColor(R.color.colorBackgroundDark))
             ImageViewCompat.setImageTintList(
@@ -79,9 +90,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(fragment: Fragment) {
-        val fTrans = supportFragmentManager.beginTransaction()
-        fTrans.replace(R.id.fl_container, fragment)
-        fTrans.commit()
+        fManager.beginTransaction()
+        .replace(R.id.fl_container, fragment)
+        .commit()
     }
 
     override fun onPause() {

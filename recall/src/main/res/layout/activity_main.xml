@@ -28,59 +28,79 @@
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
-            android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent" android:layout_weight="0" android:gravity="bottom"
-            android:background="@android:color/background_dark">
+            android:background="@android:color/background_dark" android:id="@+id/menuLayout">
         <ImageButton
                 android:layout_width="50dp"
-                android:layout_height="50dp" app:srcCompat="@drawable/ic_baseline_adb_24px"
+                android:layout_height="50dp" app:srcCompat="@drawable/ic_person_black_24dp"
                 android:id="@+id/ib_main"
-                android:tint="@color/colorBackgroundDark"
-                android:background="@color/colorBackgroundLight"
-        />
+                android:tint="@color/colorBackgroundLight"
+                android:background="@color/colorPrimaryDark"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ib_work"
+                android:contentDescription="@string/t_WIP"/>
         <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp" app:srcCompat="@drawable/ic_baseline_business_center_24px"
                 android:id="@+id/ib_work"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:tint="@color/colorBackgroundLight" android:background="@color/colorBackgroundDark"
-        />
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ib_food"
+                android:contentDescription="@string/t_WIP"/>
         <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp" app:srcCompat="@drawable/ic_baseline_fastfood_24px"
                 android:id="@+id/ib_food"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:tint="@color/colorBackgroundLight" android:background="@color/colorBackgroundDark"
-        />
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ib_shop"
+                android:contentDescription="@string/t_WIP"/>
         <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp" app:srcCompat="@drawable/ic_baseline_shopping_cart_24px"
                 android:id="@+id/ib_shop"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:tint="@color/colorBackgroundLight" android:background="@color/colorBackgroundDark"
-        />
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ib_fitness"
+                android:contentDescription="@string/t_WIP"/>
         <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp" app:srcCompat="@drawable/ic_baseline_fitness_center_24px"
                 android:id="@+id/ib_fitness"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:tint="@color/colorBackgroundLight" android:background="@color/colorBackgroundDark"
-        />
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ib_cars"
+                android:contentDescription="@string/t_WIP"/>
         <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp" app:srcCompat="@drawable/ic_baseline_drive_eta_24px"
                 android:id="@+id/ib_cars"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:tint="@color/colorBackgroundLight" android:background="@color/colorBackgroundDark"
-        />
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ib_locations"
+                android:contentDescription="@string/t_WIP"/>
         <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp" app:srcCompat="@drawable/ic_baseline_location_city_24px"
                 android:id="@+id/ib_locations"
                 style="@style/Widget.AppCompat.ImageButton"
                 android:tint="@color/colorBackgroundLight" android:background="@color/colorBackgroundDark"
-        />
-    </LinearLayout>
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/t_WIP"/>
+        <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp" app:srcCompat="@drawable/ic_settings_black_24dp"
+                android:id="@+id/ib_settings" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/colorBackgroundDark" android:tint="@color/colorBackgroundLight"
+                android:contentDescription="@string/t_WIP"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
