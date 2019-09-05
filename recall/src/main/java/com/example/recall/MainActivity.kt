@@ -22,16 +22,17 @@ import com.example.recall.money.Money.increase
 import com.example.recall.fragments.settings.SettingsFragment
 import com.example.recall.fragments.shop.ShopFragment
 import com.example.recall.fragments.work.WorkFragment
+import com.example.recall.log.L
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private val lastFragment = MainFragment()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        L.s()
         super.onCreate(savedInstanceState)
         bindingInitialization()
         GlobalScope.launch {
@@ -61,10 +62,6 @@ class MainActivity : AppCompatActivity() {
         setFragment(fragment)
     }
 
-    private fun setLastFragment() {
-        setFragment(lastFragment) // TODO - return last displayed fragment instead of Main
-    }
-
     fun increaseMoney(sum: Int) {
         increase(sum)
         updateCounters()
@@ -90,10 +87,10 @@ class MainActivity : AppCompatActivity() {
             ib_locations,
             ib_settings
         )
-        for (x in buttonsArray.indices) {
-            buttonsArray[x].setBackgroundColor(getColor(R.color.colorBackgroundDark))
+        buttonsArray.forEach {
+            it.setBackgroundColor(getColor(R.color.colorBackgroundDark))
             ImageViewCompat.setImageTintList(
-                buttonsArray[x],
+                it,
                 ColorStateList.valueOf(getColor(R.color.colorBackgroundLight))
             )
         }
@@ -111,7 +108,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
+        L.s()
         super.onPause()
         Money.save()
+    }
+
+    override fun onResume() {
+        L.s()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        L.s()
+        super.onDestroy()
+    }
+
+    override fun onStart() {
+        L.s()
+        super.onStart()
+    }
+
+    override fun onStop() {
+        L.s()
+        super.onStop()
+    }
+
+    override fun onRestart() {
+        L.s()
+        super.onRestart()
     }
 }
