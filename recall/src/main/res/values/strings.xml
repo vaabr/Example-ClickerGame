@@ -14,10 +14,11 @@
     <string name="t_job">Job: %1$s</string>
     <string name="t_level">Level: %1$s</string>
     <string name="t_skills">Skills: %1$s</string>
-    <string name="b_talk_to">talk to ...</string>
+    <string name="b_talk_to">talk to …</string>
     <!--JOBS-->
     <string name="tj_beggar">beggar</string>
     <string name="tjd_beggar">BEGGAR-DESCRIPTION</string>
     <string name="tj_janitor">janitor</string>
     <string name="tjd_janitor">JANITOR-DESCRIPTION</string>
+    <string name="loading">loading…</string>
 </resources>

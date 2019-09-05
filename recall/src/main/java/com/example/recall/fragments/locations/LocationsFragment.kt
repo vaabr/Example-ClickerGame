@@ -1,4 +1,4 @@
-package com.example.recall.locations
+package com.example.recall.fragments.locations
 
 import android.os.Bundle
 import android.view.LayoutInflater

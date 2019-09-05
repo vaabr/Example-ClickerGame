@@ -1,4 +1,4 @@
-package com.example.recall.fitness
+package com.example.recall.fragments.fitness
 
 import android.os.Bundle
 import android.view.LayoutInflater

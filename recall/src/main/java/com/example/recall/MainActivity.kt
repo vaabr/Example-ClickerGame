@@ -3,51 +3,57 @@ package com.example.recall
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.recall.Functions.sPref
-import com.example.recall.Money.format
-import com.example.recall.Money.increase
-import com.example.recall.cars.CarsFragment
-import com.example.recall.fitness.FitnessFragment
-import com.example.recall.food.FoodFragment
-import com.example.recall.locations.LocationsFragment
-import com.example.recall.main.MainFragment
-import com.example.recall.settings.SettingsFragment
-import com.example.recall.shop.ShopFragment
-import com.example.recall.work.WorkFragment
+import com.example.recall.fragments.cars.CarsFragment
+import com.example.recall.databinding.ActivityMainBinding
+import com.example.recall.fragments.fitness.FitnessFragment
+import com.example.recall.fragments.food.FoodFragment
+import com.example.recall.fragments.locations.LocationsFragment
+import com.example.recall.fragments.main.MainFragment
+import com.example.recall.money.Money
+import com.example.recall.money.Money.format
+import com.example.recall.money.Money.increase
+import com.example.recall.fragments.settings.SettingsFragment
+import com.example.recall.fragments.shop.ShopFragment
+import com.example.recall.fragments.work.WorkFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private val fManager = supportFragmentManager
     private val lastFragment = MainFragment()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //setLastFragment()  // set starting fragment - in future will set last opened fragment instead of Main
-        initializeOnClickListeners()
-        ib_main.performClick()
-        sPref = getPreferences(Context.MODE_PRIVATE) // TODO - use room instead of SP
-        Money.load()
-        updateCounters() // TODO - add react to the money variable changes
+        bindingInitialization()
+        GlobalScope.launch {
+            sPref = getPreferences(Context.MODE_PRIVATE) // TODO - use room instead of SP
+            Money.load()
+            updateCounters() // TODO - add react to the money variable changes
+        }
     }
 
-    private fun initializeOnClickListeners() {
-        ib_main.setOnClickListener { menuButton(MainFragment(), it) }
-        ib_work.setOnClickListener { menuButton(WorkFragment(), it) }
-        ib_food.setOnClickListener { menuButton(FoodFragment(), it) }
-        ib_shop.setOnClickListener { menuButton(ShopFragment(), it) }
-        ib_fitness.setOnClickListener { menuButton(FitnessFragment(), it) }
-        ib_cars.setOnClickListener { menuButton(CarsFragment(), it) }
-        ib_locations.setOnClickListener { menuButton(LocationsFragment(), it) }
-        ib_settings.setOnClickListener { menuButton(SettingsFragment(), it) }
+    private fun bindingInitialization() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.apply {
+            ibMain.setOnClickListener { menuButton(MainFragment(), it) }
+            ibWork.setOnClickListener { menuButton(WorkFragment(), it) }
+            ibFood.setOnClickListener { menuButton(FoodFragment(), it) }
+            ibShop.setOnClickListener { menuButton(ShopFragment(), it) }
+            ibFitness.setOnClickListener { menuButton(FitnessFragment(), it) }
+            ibCars.setOnClickListener { menuButton(CarsFragment(), it) }
+            ibLocations.setOnClickListener { menuButton(LocationsFragment(), it) }
+            ibSettings.setOnClickListener { menuButton(SettingsFragment(), it) }
+            ibMain.performClick()
+        }
     }
 
     private fun menuButton(fragment: Fragment, button: View) {
@@ -70,12 +76,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateCounters() {
-        tv_money.text = format()
+        binding.tvMoney.text = format()
     }
 
     private fun buttonEffect(button: View) {
-        val buttonsArray = arrayOf(ib_main, ib_work, ib_food, ib_shop, ib_fitness, ib_cars, ib_locations, ib_settings)
-        for (x in 0 until buttonsArray.size) {
+        val buttonsArray = arrayOf(
+            ib_main,
+            ib_work,
+            ib_food,
+            ib_shop,
+            ib_fitness,
+            ib_cars,
+            ib_locations,
+            ib_settings
+        )
+        for (x in buttonsArray.indices) {
             buttonsArray[x].setBackgroundColor(getColor(R.color.colorBackgroundDark))
             ImageViewCompat.setImageTintList(
                 buttonsArray[x],
@@ -90,9 +105,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(fragment: Fragment) {
-        fManager.beginTransaction()
-        .replace(R.id.fl_container, fragment)
-        .commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, fragment)
+            .commit()
     }
 
     override fun onPause() {

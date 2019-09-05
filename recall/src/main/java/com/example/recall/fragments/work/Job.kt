@@ -1,4 +1,4 @@
-package com.example.recall.work
+package com.example.recall.fragments.work
 
 class Job(val salary: Int, val name: String, val description: String) {
     var isCurrent = false

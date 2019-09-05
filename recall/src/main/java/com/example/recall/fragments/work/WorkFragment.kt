@@ -1,4 +1,4 @@
-package com.example.recall.work
+package com.example.recall.fragments.work
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,8 +23,16 @@ class WorkFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        beggar = Job(1, getString(R.string.tj_beggar).capitalize(), getString(R.string.tjd_beggar))
-        janitor = Job(5, getString(R.string.tj_janitor).capitalize(), getString(R.string.tjd_janitor))
+        beggar = Job(
+            1,
+            getString(R.string.tj_beggar).capitalize(),
+            getString(R.string.tjd_beggar)
+        )
+        janitor = Job(
+            5,
+            getString(R.string.tj_janitor).capitalize(),
+            getString(R.string.tjd_janitor)
+        )
         jobArray = arrayOf(beggar, janitor)
         defaultJob = beggar
         b_reset.setOnClickListener { (activity as MainActivity).resetMoney() }

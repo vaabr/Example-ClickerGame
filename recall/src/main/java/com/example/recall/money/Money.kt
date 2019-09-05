@@ -1,6 +1,7 @@
-package com.example.recall
+package com.example.recall.money
 
 import android.util.Log
+import com.example.recall.BuildConfig
 import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.longMax
 import com.example.recall.Functions.longMin
@@ -15,7 +16,10 @@ object Money {
     private const val lastSaveName: String = "moneyLastL"
 
     fun save() {
-        saveData(amountSaveName, amount)
+        saveData(
+            amountSaveName,
+            amount
+        )
         saveData(lastSaveName, last)
     }
 
@@ -36,7 +40,9 @@ object Money {
         saveLast()
         number.toLong()
         when {
-            ((amount + number) == (longMin + number - 2)) -> set(longMax)
+            ((amount + number) == (longMin + number - 2)) -> set(
+                longMax
+            )
             else -> set(amount + number)
         }
         logE()
@@ -44,7 +50,8 @@ object Money {
 
     private fun saveLast() {
         logS()
-        last = amount //just to save money count before transaction
+        last =
+            amount //just to save money count before transaction
         logE()
     }
 
