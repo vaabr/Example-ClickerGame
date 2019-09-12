@@ -14,7 +14,7 @@ import com.example.recall.fragments.cars.CarsFragment
 import com.example.recall.databinding.ActivityMainBinding
 import com.example.recall.fragments.fitness.FitnessFragment
 import com.example.recall.fragments.food.FoodFragment
-import com.example.recall.fragments.locations.LocationsFragment
+import com.example.recall.fragments.apartments.ApartmentsFragment
 import com.example.recall.fragments.main.MainFragment
 import com.example.recall.money.Money
 import com.example.recall.money.Money.format
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             ibShop.setOnClickListener { menuButton(ShopFragment(), it) }
             ibFitness.setOnClickListener { menuButton(FitnessFragment(), it) }
             ibCars.setOnClickListener { menuButton(CarsFragment(), it) }
-            ibLocations.setOnClickListener { menuButton(LocationsFragment(), it) }
+            ibLocations.setOnClickListener { menuButton(ApartmentsFragment(), it) }
             ibSettings.setOnClickListener { menuButton(SettingsFragment(), it) }
             ibMain.performClick()
         }

@@ -50,12 +50,5 @@
                 android:id="@+id/b_talkto"
                 android:minHeight="50dp" android:minWidth="150dp" android:padding="10dp" android:paddingTop="20dp"
                 android:paddingBottom="20dp"/>
-        <Button
-                android:text="@string/B_reset"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/b_reset"
-                android:minHeight="50dp" android:minWidth="150dp" android:padding="10dp" android:paddingTop="20dp"
-                android:paddingBottom="20dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

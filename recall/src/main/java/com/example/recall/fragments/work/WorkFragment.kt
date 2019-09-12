@@ -35,7 +35,6 @@ class WorkFragment : Fragment() {
         )
         jobArray = arrayOf(beggar, janitor)
         defaultJob = beggar
-        b_reset.setOnClickListener { (activity as MainActivity).resetMoney() }
         b_work.setOnClickListener { (activity as MainActivity).increaseMoney(findCurrentJob().payment) }
         initializeJobInfo()
     }
