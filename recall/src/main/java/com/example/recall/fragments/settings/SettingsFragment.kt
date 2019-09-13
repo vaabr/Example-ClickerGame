@@ -4,18 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.recall.MainActivity
 import com.example.recall.R
+import com.example.recall.databinding.FragmentSettingsBinding
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+
+    private lateinit var binding: FragmentSettingsBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate<FragmentSettingsBinding>(
+            inflater,
+            R.layout.fragment_settings,
+            container,
+            false
+        )
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        settingsResetButton.setOnClickListener { (activity as MainActivity).resetMoney() }
+        binding.settingsResetButton.setOnClickListener { (activity as MainActivity).resetMoney() }
     }
 }
