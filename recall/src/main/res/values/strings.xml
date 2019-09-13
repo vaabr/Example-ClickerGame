@@ -21,4 +21,7 @@
     <string name="tj_janitor">janitor</string>
     <string name="tjd_janitor">JANITOR-DESCRIPTION</string>
     <string name="loading">loading…</string>
+    <string name="buyButtonAppartment">buy/rent</string>
+    <string name="sleep">sleep</string>
+    <string name="party">party</string>
 </resources>
