@@ -10,7 +10,7 @@ import androidx.core.widget.ImageViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.recall.Functions.sPref
-import com.example.recall.Stats.formatHapiness
+import com.example.recall.Stats.formatHappiness
 import com.example.recall.Stats.formatHealth
 import com.example.recall.Stats.formatHunger
 import com.example.recall.Stats.formatRent
@@ -27,7 +27,6 @@ import com.example.recall.fragments.settings.SettingsFragment
 import com.example.recall.fragments.shop.ShopFragment
 import com.example.recall.fragments.work.WorkFragment
 import com.example.recall.log.L
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -80,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateCounters() {
         binding.apply {
             tvMoney.text = format()
-            tvHappiness.text = formatHapiness()
+            tvHappiness.text = formatHappiness()
             tvHealth.text = formatHealth()
             tvHunger.text = formatHunger()
             tvRent.text = formatRent()
