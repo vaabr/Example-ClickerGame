@@ -2,65 +2,52 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
             android:id="@+id/tv_job"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/t_placeholder"
+            android:text="@string/loading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Job: Beggar" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/t_placeholder"
+            android:text="@string/loading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_job"
             tools:text="Level: 1" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_salary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/t_placeholder"
+            android:text="@string/loading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_level"
             tools:text="Salary: 1$" />
-    <LinearLayout
-            android:orientation="vertical"
+
+        <Button
+            android:id="@+id/b_work"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:minWidth="150dp"
+            android:minHeight="50dp"
+            android:padding="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/b_work"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintVertical_bias="0.95">
-        <Button
-                android:text="@string/b_work"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/b_work" style="@style/Widget.AppCompat.Button"
-                android:minHeight="50dp" android:minWidth="150dp" android:padding="10dp" android:paddingTop="20dp"
-                android:paddingBottom="20dp"/>
-        <Button
-                android:text="@string/b_talk_to"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/b_talkto"
-                android:minHeight="50dp" android:minWidth="150dp" android:padding="10dp" android:paddingTop="20dp"
-                android:paddingBottom="20dp"/>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -21,12 +21,64 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/stats_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_happiness"
+                    style="@style/text_stats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loading"
+                    android:typeface="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Happiness: 100" />
+
+                <TextView
+                    android:id="@+id/tv_hunger"
+                    style="@style/text_stats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_happiness"
+                    tools:text="Hunger: 100" />
+
+                <TextView
+                    android:id="@+id/tv_health"
+                    style="@style/text_stats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hunger"
+                    tools:text="Health: 100" />
+
+                <TextView
+                    android:id="@+id/tv_rent"
+                    style="@style/text_stats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loading"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_health"
+                    tools:text="Rent: 10 clicks" />
+
+                <TextView
                     android:id="@+id/tv_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/loading"
                     android:textColor="@color/colorBackgroundDark"
@@ -34,15 +86,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="0$" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <FrameLayout
-                    android:id="@+id/fl_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                android:id="@+id/fl_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stats_bar">
 
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

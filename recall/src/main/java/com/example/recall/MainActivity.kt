@@ -10,6 +10,10 @@ import androidx.core.widget.ImageViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.recall.Functions.sPref
+import com.example.recall.Stats.formatHapiness
+import com.example.recall.Stats.formatHealth
+import com.example.recall.Stats.formatHunger
+import com.example.recall.Stats.formatRent
 import com.example.recall.fragments.cars.CarsFragment
 import com.example.recall.databinding.ActivityMainBinding
 import com.example.recall.fragments.fitness.FitnessFragment
@@ -36,9 +40,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingInitialization()
         GlobalScope.launch {
-            sPref = getPreferences(Context.MODE_PRIVATE) // TODO - use room instead of SP
+            sPref = getPreferences(Context.MODE_PRIVATE)
             Money.load()
-            updateCounters() // TODO - add react to the money variable changes
+            updateCounters()
         }
     }
 
@@ -59,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun menuButton(fragment: Fragment, button: View) {
         buttonEffect(button)
+        if (button == binding.ibSettings) binding.statsBar.visibility = View.GONE else binding.statsBar.visibility = View.VISIBLE
         setFragment(fragment)
     }
 
@@ -73,38 +78,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateCounters() {
-        binding.tvMoney.text = format()
+        binding.apply {
+            tvMoney.text = format()
+            tvHappiness.text = formatHapiness()
+            tvHealth.text = formatHealth()
+            tvHunger.text = formatHunger()
+            tvRent.text = formatRent()
+        }
     }
 
     private fun buttonEffect(button: View) {
         val buttonsArray = arrayOf(
-            ib_main,
-            ib_work,
-            ib_food,
-            ib_shop,
-            ib_fitness,
-            ib_cars,
-            ib_locations,
-            ib_settings
+                binding.ibMain,
+                binding.ibWork,
+                binding.ibFood,
+                binding.ibShop,
+                binding.ibFitness,
+                binding.ibCars,
+                binding.ibLocations,
+                binding.ibSettings
         )
         buttonsArray.forEach {
             it.setBackgroundColor(getColor(R.color.colorBackgroundDark))
             ImageViewCompat.setImageTintList(
-                it,
-                ColorStateList.valueOf(getColor(R.color.colorBackgroundLight))
+                    it,
+                    ColorStateList.valueOf(getColor(R.color.colorBackgroundLight))
             )
         }
         button.setBackgroundColor(getColor(R.color.colorBackgroundLight))
         ImageViewCompat.setImageTintList(
-            button as ImageButton,
-            ColorStateList.valueOf(getColor(R.color.colorBackgroundDark))
+                button as ImageButton,
+                ColorStateList.valueOf(getColor(R.color.colorBackgroundDark))
         )
     }
 
     private fun setFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, fragment)
-            .commit()
+                .replace(R.id.fl_container, fragment)
+                .commit()
     }
 
     override fun onPause() {

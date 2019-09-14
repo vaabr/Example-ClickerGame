@@ -9,38 +9,35 @@
             android:orientation="vertical">
 
         <Button
-                android:id="@+id/buyButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/buyButtonAppartment"
-                app:layout_constraintBottom_toBottomOf="@+id/sleepButton"
-                app:layout_constraintEnd_toStartOf="@+id/sleepButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/buyButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/buyButtonAppartment"
+            app:layout_constraintBottom_toBottomOf="@+id/sleepButton"
+            app:layout_constraintEnd_toStartOf="@+id/sleepButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-                android:id="@+id/sleepButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/sleep"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/partyButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/buyButton" />
+            android:id="@+id/sleepButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/sleep"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/partyButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buyButton" />
 
         <Button
-                android:id="@+id/partyButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/party"
-                app:layout_constraintBottom_toBottomOf="@+id/sleepButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/sleepButton" />
+            android:id="@+id/partyButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/party"
+            app:layout_constraintBottom_toBottomOf="@+id/sleepButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/sleepButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
