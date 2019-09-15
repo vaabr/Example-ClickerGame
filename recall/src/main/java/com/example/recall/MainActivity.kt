@@ -30,13 +30,19 @@ import com.example.recall.log.L
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+const val KEY_LASTCLICKED = "key_lastClicked"
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var lastClicked: ImageButton
+    private var lastClickedID = 0
+    private lateinit var buttonsArray: Array<ImageButton>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         L.s()
         super.onCreate(savedInstanceState)
+        lastClickedID = savedInstanceState?.getInt(KEY_LASTCLICKED, 0) ?: 0
         bindingInitialization()
         GlobalScope.launch {
             sPref = getPreferences(Context.MODE_PRIVATE)
@@ -56,11 +62,23 @@ class MainActivity : AppCompatActivity() {
             ibCars.setOnClickListener { menuButton(CarsFragment(), it) }
             ibLocations.setOnClickListener { menuButton(ApartmentsFragment(), it) }
             ibSettings.setOnClickListener { menuButton(SettingsFragment(), it) }
-            ibMain.performClick()
         }
+        buttonsArray = arrayOf(
+            binding.ibMain,
+            binding.ibWork,
+            binding.ibFood,
+            binding.ibShop,
+            binding.ibFitness,
+            binding.ibCars,
+            binding.ibLocations,
+            binding.ibSettings
+        )
+        buttonsArray[lastClickedID].performClick()
+
     }
 
     private fun menuButton(fragment: Fragment, button: View) {
+        if (button is ImageButton) lastClicked=button
         buttonEffect(button)
         if (button == binding.ibSettings) binding.statsBar.visibility = View.GONE else binding.statsBar.visibility = View.VISIBLE
         setFragment(fragment)
@@ -87,16 +105,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun buttonEffect(button: View) {
-        val buttonsArray = arrayOf(
-                binding.ibMain,
-                binding.ibWork,
-                binding.ibFood,
-                binding.ibShop,
-                binding.ibFitness,
-                binding.ibCars,
-                binding.ibLocations,
-                binding.ibSettings
-        )
         buttonsArray.forEach {
             it.setBackgroundColor(getColor(R.color.colorBackgroundDark))
             ImageViewCompat.setImageTintList(
@@ -115,6 +123,12 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fl_container, fragment)
                 .commit()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        L.s()
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_LASTCLICKED, buttonsArray.find { it == lastClicked }?.id ?: 0)
     }
 
     override fun onPause() {
