@@ -6,20 +6,20 @@ object Stats {
     var healthStat = 100
     var rentStat = 10
 
-    fun increaseHappiness(x: Int){
+    fun increaseHappiness(x: Int) {
         happinessStat = increaseStat(happinessStat, x)
     }
 
-    fun increaseHunger(x: Int){
+    fun increaseHunger(x: Int) {
         hungerStat = increaseStat(hungerStat, x)
     }
 
-    fun increaseHealth(x: Int){
+    fun increaseHealth(x: Int) {
         healthStat = increaseStat(healthStat, x)
     }
 
-    fun increaseRent(x: Int){
-        if(rentStat+x>=0) rentStat+=x else rentStat=0
+    fun increaseRent(x: Int) {
+        if (rentStat + x >= 0) rentStat += x else rentStat = 0
     }
 
     fun formatHappiness(): String = "Happiness: $happinessStat"
@@ -27,11 +27,11 @@ object Stats {
     fun formatHealth(): String = "Health: $healthStat"
     fun formatRent(): String = "Rent: $rentStat clicks"
 
-    private fun increaseStat(stat: Int, x: Int): Int{
+    private fun increaseStat(stat: Int, x: Int): Int {
         return when {
-            (stat+x<0) -> 0
-            (stat+x>100) -> 100
-            else -> stat+x
+            (stat + x < 0) -> 0
+            (stat + x > 100) -> 100
+            else -> stat + x
         }
     }
 

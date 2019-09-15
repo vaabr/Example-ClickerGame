@@ -78,9 +78,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun menuButton(fragment: Fragment, button: View) {
-        if (button is ImageButton) lastClicked=button
+        if (button is ImageButton) lastClicked = button
         buttonEffect(button)
-        if (button == binding.ibSettings) binding.statsBar.visibility = View.GONE else binding.statsBar.visibility = View.VISIBLE
+        if (button == binding.ibSettings) binding.statsBar.visibility =
+            View.GONE else binding.statsBar.visibility = View.VISIBLE
         setFragment(fragment)
     }
 
@@ -108,21 +109,21 @@ class MainActivity : AppCompatActivity() {
         buttonsArray.forEach {
             it.setBackgroundColor(getColor(R.color.colorBackgroundDark))
             ImageViewCompat.setImageTintList(
-                    it,
-                    ColorStateList.valueOf(getColor(R.color.colorBackgroundLight))
+                it,
+                ColorStateList.valueOf(getColor(R.color.colorBackgroundLight))
             )
         }
         button.setBackgroundColor(getColor(R.color.colorBackgroundLight))
         ImageViewCompat.setImageTintList(
-                button as ImageButton,
-                ColorStateList.valueOf(getColor(R.color.colorBackgroundDark))
+            button as ImageButton,
+            ColorStateList.valueOf(getColor(R.color.colorBackgroundDark))
         )
     }
 
     private fun setFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_container, fragment)
-                .commit()
+            .replace(R.id.fl_container, fragment)
+            .commit()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

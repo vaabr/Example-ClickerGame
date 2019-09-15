@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.recall.Functions
 import com.example.recall.MainActivity
 import com.example.recall.R
+import com.example.recall.Stats
 import com.example.recall.databinding.FragmentWorkBinding
-import kotlinx.android.synthetic.main.fragment_work.*
 
 class WorkFragment : Fragment() {
     private lateinit var beggar: Job
@@ -31,11 +31,20 @@ class WorkFragment : Fragment() {
             container,
             false
         )
+        initializeJobs()
+        jobArray = arrayOf(beggar, janitor)
+        defaultJob = beggar
+        binding.bWork.setOnClickListener {
+            if (Stats.hungerStat > 0) {
+                Stats.increaseHunger(-3); (activity as MainActivity).increaseMoney(findCurrentJob().payment)
+            }
+        }
+        binding.bAsk.setOnClickListener { if (findCurrentJob() == beggar) setCurrentJob(janitor) else setCurrentJob(beggar) }
+        initializeJobInfo()
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun initializeJobs() {
         beggar = Job(
             1,
             getString(R.string.tj_beggar).capitalize(),
@@ -46,10 +55,6 @@ class WorkFragment : Fragment() {
             getString(R.string.tj_janitor).capitalize(),
             getString(R.string.tjd_janitor)
         )
-        jobArray = arrayOf(beggar, janitor)
-        defaultJob = beggar
-        binding.bWork.setOnClickListener { (activity as MainActivity).increaseMoney(findCurrentJob().payment) }
-        initializeJobInfo()
     }
 
     private fun initializeJobInfo() {
@@ -59,14 +64,13 @@ class WorkFragment : Fragment() {
             tvLevel.text = getString(R.string.t_level, currentJob.level.toString())
             tvSalary.text = getString(R.string.t_salary, currentJob.salary.toString())
         }
-        /*tv_job.text = getString(R.string.t_job, currentJob.name)
-        tv_level.text = getString(R.string.t_level, currentJob.level.toString())
-        tv_salary.text = getString(R.string.t_salary, currentJob.salary.toString())*/
     }
 
     private fun loadCurrentJob() {
-        when (Functions.loadString("Current Job")) {
-            beggar.name -> beggar.makeCurrent()
+        fun check(job: Job):Boolean = Functions.loadString("Current Job") == job.name
+        when {
+            check(beggar) -> setCurrentJob(beggar)
+            check(janitor) -> setCurrentJob(janitor)
             else -> defaultJob.name
         }
     }
@@ -80,6 +84,12 @@ class WorkFragment : Fragment() {
             if (jobArray[i].isCurrent) return (jobArray[i])
         }
         return defaultJob
+    }
+
+    private fun setCurrentJob(job: Job) {
+        jobArray.forEach { it.isCurrent = false }
+        job.makeCurrent()
+        initializeJobInfo()
     }
 
     override fun onResume() {

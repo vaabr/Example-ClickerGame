@@ -11,7 +11,7 @@
     <string name="b_work">work</string>
     <string name="B_reset">reset</string>
     <string name="t_salary">Salary: %1$s $</string>
-    <string name="t_job">Job: %1$s</string>
+    <string name="t_job">Position: %1$s</string>
     <string name="t_level">Level: %1$s</string>
     <string name="t_skills">Skills: %1$s</string>
     <string name="b_talk_to">talk to …</string>
@@ -21,7 +21,11 @@
     <string name="tj_janitor">janitor</string>
     <string name="tjd_janitor">JANITOR-DESCRIPTION</string>
     <string name="loading">loading…</string>
-    <string name="buyButtonAppartment">buy/rent</string>
+    <string name="buyButtonApartment">buy/rent</string>
     <string name="sleep">sleep</string>
     <string name="party">party</string>
+    <string name="buy">buy</string>
+    <string name="payrise">payrise</string>
+    <string name="buyFood">buy food</string>
+    <string name="workHeader">Your current job:</string>
 </resources>
