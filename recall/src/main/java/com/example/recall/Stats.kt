@@ -19,7 +19,7 @@ object Stats {
     }
 
     fun increaseRent(x: Int){
-        if(rentStat+x>=0) rentStat+=x else 0
+        if(rentStat+x>=0) rentStat+=x else rentStat=0
     }
 
     fun formatHappiness(): String = "Happiness: $happinessStat"
