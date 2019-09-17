@@ -2,6 +2,7 @@ package com.example.recall.fragments.work
 
 import com.example.recall.Functions
 import com.example.recall.Stats
+import com.example.recall.log.L
 import com.example.recall.money.Money
 
 object JobsObject {
@@ -20,8 +21,9 @@ object JobsObject {
         jobsMap[key]?.makeCurrent(true)
     }
 
-    fun findCurrent(): String {
-        lateinit var result: String
+    fun findCurrent(): String? {
+        L.s()
+        var result: String? = null
         jobsMap.forEach { (t, u) -> if (u.isCurrent) result = t }
         return result
     }
@@ -36,10 +38,11 @@ object JobsObject {
     }
 
     fun saveCurrentJob() {
-        Functions.saveData("Current Job", findCurrent())
+        Functions.saveData("Current Job", findCurrent() ?: KEY_BEGGAR)
     }
 
     fun loadCurrentJob() {
+        L.s()
         setCurrent(Functions.loadString("Current Job") ?: KEY_BEGGAR)
     }
 }

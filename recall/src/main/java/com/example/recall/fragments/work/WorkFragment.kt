@@ -18,6 +18,7 @@ import com.example.recall.fragments.work.JobsObject.loadCurrentJob
 import com.example.recall.fragments.work.JobsObject.nullSafeFindCurrent
 import com.example.recall.fragments.work.JobsObject.saveCurrentJob
 import com.example.recall.fragments.work.JobsObject.setCurrent
+import com.example.recall.log.L
 
 class WorkFragment : Fragment() {
 
@@ -39,7 +40,7 @@ class WorkFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(WorkViewModel::class.java)
         loadCurrentJob()
         initializeOnClickListeners()
-        initializeJobInfo()
+        updateJobInfo()
 
         return binding.root
     }
@@ -53,10 +54,12 @@ class WorkFragment : Fragment() {
         binding.bAsk.setOnClickListener {
             if (findCurrent() == KEY_BEGGAR) setCurrent(KEY_JANITOR)
             else setCurrent(KEY_BEGGAR)
+            updateJobInfo()
         }
     }
 
-    private fun initializeJobInfo() {
+    private fun updateJobInfo() {
+        L.s()
         val currentJob = nullSafeFindCurrent()
         binding.apply {
             tvJob.text = getString(R.string.t_job, currentJob.name)
@@ -67,11 +70,13 @@ class WorkFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        L.s()
         loadCurrentJob()
     }
 
     override fun onPause() {
         super.onPause()
+        L.s()
         saveCurrentJob()
     }
 
