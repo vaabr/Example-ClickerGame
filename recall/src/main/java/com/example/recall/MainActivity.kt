@@ -26,6 +26,9 @@ import com.example.recall.money.Money.format
 import com.example.recall.money.Money.increase
 import com.example.recall.fragments.settings.SettingsFragment
 import com.example.recall.fragments.shop.ShopFragment
+import com.example.recall.fragments.work.JobsObject.KEY_BEGGAR
+import com.example.recall.fragments.work.JobsObject.KEY_JANITOR
+import com.example.recall.fragments.work.JobsObject.jobsMap
 import com.example.recall.fragments.work.WorkFragment
 import com.example.recall.log.L
 import kotlinx.coroutines.GlobalScope
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         lastClickedID = savedInstanceState?.getInt(KEY_LASTCLICKED, 0) ?: 0
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         bindingInitialization()
+        jobsInitialization()
         sPref = getPreferences(Context.MODE_PRIVATE)
         Money.load()
         updateCounters()
@@ -76,6 +80,11 @@ class MainActivity : AppCompatActivity() {
         )
         buttonsArray[lastClickedID].performClick()
 
+    }
+
+    private fun jobsInitialization() {
+        jobsMap[KEY_BEGGAR]!!.name = getString(R.string.tj_beggar).capitalize()
+        jobsMap[KEY_JANITOR]!!.name = getString(R.string.tj_janitor).capitalize()
     }
 
     private fun menuButton(fragment: Fragment, button: View) {
