@@ -1,6 +1,6 @@
 package com.example.recall.fragments.work
 
-class Job(val salary: Int, val name: String, val description: String) {
+class Job(val salary: Int, val name: String, val description: String, val decreasedHunger: Int = 3, val deacreaseHealth: Int = 0) {
     var isCurrent = false
     var level = 1
     var payment = salary
@@ -31,8 +31,8 @@ class Job(val salary: Int, val name: String, val description: String) {
         payment = (salary + (salary * 0.01 * level)).toInt()
     }
 
-    fun makeCurrent() {
-        isCurrent = true
+    fun makeCurrent(x: Boolean) {
+        isCurrent = x
     }
 
 }

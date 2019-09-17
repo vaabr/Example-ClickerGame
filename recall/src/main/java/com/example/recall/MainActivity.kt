@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.recall.Functions.sPref
 import com.example.recall.Stats.formatHappiness
 import com.example.recall.Stats.formatHealth
@@ -34,6 +35,7 @@ const val KEY_LASTCLICKED = "key_lastClicked"
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var viewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var lastClicked: ImageButton
     private var lastClickedID = 0
@@ -43,12 +45,11 @@ class MainActivity : AppCompatActivity() {
         L.s()
         super.onCreate(savedInstanceState)
         lastClickedID = savedInstanceState?.getInt(KEY_LASTCLICKED, 0) ?: 0
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         bindingInitialization()
-        GlobalScope.launch {
-            sPref = getPreferences(Context.MODE_PRIVATE)
-            Money.load()
-            updateCounters()
-        }
+        sPref = getPreferences(Context.MODE_PRIVATE)
+        Money.load()
+        updateCounters()
     }
 
     private fun bindingInitialization() {
@@ -85,17 +86,12 @@ class MainActivity : AppCompatActivity() {
         setFragment(fragment)
     }
 
-    fun increaseMoney(sum: Int) {
-        increase(sum)
-        updateCounters()
-    }
-
     fun resetMoney() {
         Money.set(0)
         updateCounters()
     }
 
-    private fun updateCounters() {
+    fun updateCounters() {
         binding.apply {
             tvMoney.text = format()
             tvHappiness.text = formatHappiness()
@@ -135,7 +131,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         L.s()
         super.onPause()
-        Money.save()
+        //Money.save()
     }
 
     override fun onResume() {
@@ -143,23 +139,16 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
     }
 
-    override fun onDestroy() {
-        L.s()
-        super.onDestroy()
-    }
-
     override fun onStart() {
         L.s()
         super.onStart()
+        Money.load()
+        updateCounters()
     }
 
     override fun onStop() {
         L.s()
         super.onStop()
-    }
-
-    override fun onRestart() {
-        L.s()
-        super.onRestart()
+        Money.save()
     }
 }

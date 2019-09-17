@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.saveData
 import com.example.recall.R
 import com.example.recall.databinding.FragmentMainBinding
+import com.example.recall.fragments.work.WorkViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-
-    var money: Long = 0
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,16 +29,9 @@ class MainFragment : Fragment() {
             container,
             false
         )
+
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        money = loadLong("money")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        saveData("money", money)
     }
 }
