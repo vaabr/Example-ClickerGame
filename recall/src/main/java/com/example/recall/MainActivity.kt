@@ -7,50 +7,83 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.ImageViewCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.recall.Functions.sPref
-import com.example.recall.Money.format
-import com.example.recall.Money.increase
-import com.example.recall.cars.CarsFragment
-import com.example.recall.fitness.FitnessFragment
-import com.example.recall.food.FoodFragment
-import com.example.recall.locations.LocationsFragment
-import com.example.recall.main.MainFragment
-import com.example.recall.shop.ShopFragment
-import com.example.recall.work.WorkFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.recall.Stats.formatHappiness
+import com.example.recall.Stats.formatHealth
+import com.example.recall.Stats.formatHunger
+import com.example.recall.Stats.formatRent
+import com.example.recall.fragments.cars.CarsFragment
+import com.example.recall.databinding.ActivityMainBinding
+import com.example.recall.fragments.fitness.FitnessFragment
+import com.example.recall.fragments.food.FoodFragment
+import com.example.recall.fragments.apartments.ApartmentsFragment
+import com.example.recall.fragments.main.MainFragment
+import com.example.recall.money.Money
+import com.example.recall.money.Money.format
+import com.example.recall.money.Money.increase
+import com.example.recall.fragments.settings.SettingsFragment
+import com.example.recall.fragments.shop.ShopFragment
+import com.example.recall.fragments.work.WorkFragment
+import com.example.recall.log.L
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
+const val KEY_LASTCLICKED = "key_lastClicked"
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var lastClicked: ImageButton
+    private var lastClickedID = 0
+    private lateinit var buttonsArray: Array<ImageButton>
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        L.s()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setFragment(MainFragment())
-        initializeOnClickListeners()
+        lastClickedID = savedInstanceState?.getInt(KEY_LASTCLICKED, 0) ?: 0
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        bindingInitialization()
         sPref = getPreferences(Context.MODE_PRIVATE)
         Money.load()
         updateCounters()
     }
 
-    private fun initializeOnClickListeners() {
-        ib_main.setOnClickListener { menuButton(MainFragment(), it) }
-        ib_work.setOnClickListener { menuButton(WorkFragment(), it) }
-        ib_food.setOnClickListener { menuButton(FoodFragment(), it) }
-        ib_shop.setOnClickListener { menuButton(ShopFragment(), it) }
-        ib_fitness.setOnClickListener { menuButton(FitnessFragment(), it) }
-        ib_cars.setOnClickListener { menuButton(CarsFragment(), it) }
-        ib_locations.setOnClickListener { menuButton(LocationsFragment(), it) }
+    private fun bindingInitialization() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.apply {
+            ibMain.setOnClickListener { menuButton(MainFragment(), it) }
+            ibWork.setOnClickListener { menuButton(WorkFragment(), it) }
+            ibFood.setOnClickListener { menuButton(FoodFragment(), it) }
+            ibShop.setOnClickListener { menuButton(ShopFragment(), it) }
+            ibFitness.setOnClickListener { menuButton(FitnessFragment(), it) }
+            ibCars.setOnClickListener { menuButton(CarsFragment(), it) }
+            ibLocations.setOnClickListener { menuButton(ApartmentsFragment(), it) }
+            ibSettings.setOnClickListener { menuButton(SettingsFragment(), it) }
+        }
+        buttonsArray = arrayOf(
+            binding.ibMain,
+            binding.ibWork,
+            binding.ibFood,
+            binding.ibShop,
+            binding.ibFitness,
+            binding.ibCars,
+            binding.ibLocations,
+            binding.ibSettings
+        )
+        buttonsArray[lastClickedID].performClick()
+
     }
 
     private fun menuButton(fragment: Fragment, button: View) {
-        updateCounters()
+        if (button is ImageButton) lastClicked = button
         buttonEffect(button)
+        if (button == binding.ibSettings) binding.statsBar.visibility =
+            View.GONE else binding.statsBar.visibility = View.VISIBLE
         setFragment(fragment)
-    }
-
-    fun increaseMoney(sum: Int) {
-        increase(sum)
-        updateCounters()
     }
 
     fun resetMoney() {
@@ -59,15 +92,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateCounters() {
-        tv_money.text = format()
+        binding.apply {
+            tvMoney.text = format()
+            tvHappiness.text = formatHappiness()
+            tvHealth.text = formatHealth()
+            tvHunger.text = formatHunger()
+            tvRent.text = formatRent()
+        }
     }
 
     private fun buttonEffect(button: View) {
-        val buttonsArray = arrayOf(ib_main, ib_work, ib_food, ib_shop, ib_fitness, ib_cars, ib_locations)
-        for (x in 0 until buttonsArray.size) {
-            buttonsArray[x].setBackgroundColor(getColor(R.color.colorBackgroundDark))
+        buttonsArray.forEach {
+            it.setBackgroundColor(getColor(R.color.colorBackgroundDark))
             ImageViewCompat.setImageTintList(
-                buttonsArray[x],
+                it,
                 ColorStateList.valueOf(getColor(R.color.colorBackgroundLight))
             )
         }
@@ -79,13 +117,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(fragment: Fragment) {
-        val fTrans = supportFragmentManager.beginTransaction()
-        fTrans.replace(R.id.fl_container, fragment)
-        fTrans.commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, fragment)
+            .commit()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        L.s()
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_LASTCLICKED, buttonsArray.find { it == lastClicked }?.id ?: 0)
     }
 
     override fun onPause() {
+        L.s()
         super.onPause()
+        //Money.save()
+    }
+
+    override fun onResume() {
+        L.s()
+        super.onResume()
+    }
+
+    override fun onStart() {
+        L.s()
+        super.onStart()
+        Money.load()
+        updateCounters()
+    }
+
+    override fun onStop() {
+        L.s()
+        super.onStop()
         Money.save()
     }
 }

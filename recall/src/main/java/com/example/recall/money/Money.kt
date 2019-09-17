@@ -1,11 +1,10 @@
-package com.example.recall
+package com.example.recall.money
 
-import android.app.Activity
-import android.util.Log
 import com.example.recall.Functions.loadLong
 import com.example.recall.Functions.longMax
 import com.example.recall.Functions.longMin
 import com.example.recall.Functions.saveData
+import com.example.recall.log.L
 import kotlin.math.abs
 import kotlin.math.pow
 
@@ -16,7 +15,10 @@ object Money {
     private const val lastSaveName: String = "moneyLastL"
 
     fun save() {
-        saveData(amountSaveName, amount)
+        saveData(
+            amountSaveName,
+            amount
+        )
         saveData(lastSaveName, last)
     }
 
@@ -25,32 +27,34 @@ object Money {
         last = loadLong(lastSaveName)
     }
 
-    fun set(number: Long) { //to set money for e.g. when loading from memory
-        logS()
+    fun set(number: Long) {
+        L.s()
         saveLast()
         amount = number
-        logE()
+        L.e()
     }
 
-    fun increase(number: Int) { //to increase in case of e.g. salary or decrease when e.g. buying something
-        logS()
+    fun increase(number: Int) {
+        L.s()
         saveLast()
         number.toLong()
         when {
-            ((amount + number) == (longMin + number - 2)) -> set(longMax)
+            ((amount + number) == (longMin + number - 2)) -> set(
+                longMax
+            )
             else -> set(amount + number)
         }
-        logE()
+        L.e()
     }
 
     private fun saveLast() {
-        logS()
-        last = amount //just to save money count before transaction
-        logE()
+        L.s()
+        last = amount
+        L.e()
     }
 
-    fun format(): String { //to format money before displaying it in textview. Parameters letter according for this - https://idlechampions.gamepedia.com/Large_number_abbreviations
-        logS()
+    fun format(): String {
+        L.s()
         val ten = 10F
         val sign = "$"
         fun ten(x: Int) = ten.pow(x).toInt()
@@ -58,7 +62,7 @@ object Money {
             ((amount / ten(x)).toString() + "," + ((amount / ten(x - 1)) % 10).toString() + "$letter $symbol")
 
         fun range(x: Int) = ten(x) until ten(x + 3)
-        logE()
+        L.e()
         return when (abs(amount)) {
             in 0 until ten(3) -> ("$amount $")
             in range(3) -> returning(3, "K", sign)
@@ -70,21 +74,4 @@ object Money {
             else -> (amount.toString())
         }
     }
-
-    private fun logS() { //logs a function starting
-        val name = Throwable().stackTrace[1].methodName
-        val tM: String = "MoneyObject" //Log tag for Money object
-        val ending: String = " function starts"
-        Log.d(tM, (name + ending))
-        if (BuildConfig.DEBUG) println("$tM: $name$ending")
-    }
-
-    private fun logE() { //logs a function ending
-        val name = Throwable().stackTrace[1].methodName
-        val tM: String = "MoneyObject" //Log tag for Money object
-        val ending: String = " function ends"
-        Log.d(tM, (name + ending))
-        if (BuildConfig.DEBUG) println("$tM: $name$ending")
-    }
-
 }
