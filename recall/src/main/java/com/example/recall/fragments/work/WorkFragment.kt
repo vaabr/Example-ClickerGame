@@ -13,9 +13,9 @@ import com.example.recall.databinding.FragmentWorkBinding
 import com.example.recall.fragments.work.JobsObject.KEY_BEGGAR
 import com.example.recall.fragments.work.JobsObject.KEY_JANITOR
 import com.example.recall.fragments.work.JobsObject.doWork
-import com.example.recall.fragments.work.JobsObject.findCurrent
+import com.example.recall.fragments.work.JobsObject.findNameOfCurrent
 import com.example.recall.fragments.work.JobsObject.loadCurrentJob
-import com.example.recall.fragments.work.JobsObject.nullSafeFindCurrent
+import com.example.recall.fragments.work.JobsObject.findCurrent
 import com.example.recall.fragments.work.JobsObject.saveCurrentJob
 import com.example.recall.fragments.work.JobsObject.setCurrent
 import com.example.recall.log.L
@@ -52,7 +52,7 @@ class WorkFragment : Fragment() {
         }
 
         binding.bAsk.setOnClickListener {
-            if (findCurrent() == KEY_BEGGAR) setCurrent(KEY_JANITOR)
+            if (findNameOfCurrent() == KEY_BEGGAR) setCurrent(KEY_JANITOR)
             else setCurrent(KEY_BEGGAR)
             updateJobInfo()
         }
@@ -60,9 +60,9 @@ class WorkFragment : Fragment() {
 
     private fun updateJobInfo() {
         L.s()
-        val currentJob = nullSafeFindCurrent()
+        val currentJob = findCurrent()
         binding.apply {
-            tvJob.text = getString(R.string.t_job, currentJob.name)
+            tvJob.text = getString(R.string.t_job, currentJob.name).capitalize()
             tvLevel.text = getString(R.string.t_level, currentJob.level.toString())
             tvSalary.text = getString(R.string.t_salary, currentJob.salary.toString())
         }

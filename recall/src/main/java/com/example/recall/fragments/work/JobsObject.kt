@@ -12,7 +12,7 @@ object JobsObject {
 
     private val beggar = Job(1, " ", " ")
     private val janitor = Job(5, " ", " ")
-    private val error = Job(0, "ERROR", "ERROR")
+    private val error = Job(0, "no job", "no job")
 
     val jobsMap = mapOf(KEY_ERROR to error, KEY_BEGGAR to beggar, KEY_JANITOR to janitor)
 
@@ -21,24 +21,24 @@ object JobsObject {
         jobsMap[key]?.makeCurrent(true)
     }
 
-    fun findCurrent(): String? {
+    fun findNameOfCurrent(): String? {
         L.s()
         var result: String? = null
         jobsMap.forEach { (t, u) -> if (u.isCurrent) result = t }
         return result
     }
 
-    fun nullSafeFindCurrent(): Job = jobsMap[findCurrent()] ?: error
+    fun findCurrent(): Job = jobsMap[findNameOfCurrent()] ?: error
 
     fun doWork() {
-        if (Stats.hungerStat - nullSafeFindCurrent().decreasedHunger >= 0) {
-            Stats.increaseHunger(-(nullSafeFindCurrent().decreasedHunger))
-            Money.increase(nullSafeFindCurrent().payment)
+        if (Stats.hungerStat - findCurrent().decreasedHunger >= 0) {
+            Stats.increaseHunger(-(findCurrent().decreasedHunger))
+            Money.increase(findCurrent().payment)
         }
     }
 
     fun saveCurrentJob() {
-        Functions.saveData("Current Job", findCurrent() ?: KEY_BEGGAR)
+        Functions.saveData("Current Job", findNameOfCurrent() ?: KEY_BEGGAR)
     }
 
     fun loadCurrentJob() {
