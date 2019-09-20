@@ -1,6 +1,6 @@
 package com.example.recall.fragments.work
 
-class Job(val salary: Int, var name: String, var description: String, val decreasedHunger: Int = 3, val deacreaseHealth: Int = 0) {
+class Job(val salary: Int, var name: String, var description: String, val decreasedHunger: Int = 3, val deacreasedHealth: Int = 0, var iconID: Int = 0) {
     var isCurrent = false
     var level = 1
     var payment = salary

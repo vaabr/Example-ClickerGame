@@ -60,16 +60,16 @@
                 android:layout_marginEnd="8dp"
                 android:text="@string/b_work"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/b_ask"
+                app:layout_constraintEnd_toStartOf="@+id/b_findJob"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-                android:id="@+id/b_ask"
+                android:id="@+id/b_findJob"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="swap jobs"
+                android:text="@string/findJob"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/b_work"

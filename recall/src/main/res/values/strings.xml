@@ -28,4 +28,6 @@
     <string name="payrise">payrise</string>
     <string name="buyFood">buy food</string>
     <string name="workHeader">Your current job:</string>
+    <string name="findJob">Find a Job</string>
+    <string name="apply">apply</string>
 </resources>

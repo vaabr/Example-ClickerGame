@@ -1,7 +1,7 @@
 package com.example.recall.fragments.work
 
 import com.example.recall.Functions
-import com.example.recall.Stats
+import com.example.recall.stats.StatsObject
 import com.example.recall.log.L
 import com.example.recall.money.Money
 
@@ -15,6 +15,7 @@ object JobsObject {
     private val error = Job(0, "no job", "no job")
 
     val jobsMap = mapOf(KEY_ERROR to error, KEY_BEGGAR to beggar, KEY_JANITOR to janitor)
+    val arrayOfKeys = arrayListOf(KEY_BEGGAR, KEY_JANITOR)
 
     fun setCurrent(key: String) {
         jobsMap.forEach { (_, v) -> v.makeCurrent(false) }
@@ -31,8 +32,8 @@ object JobsObject {
     fun findCurrent(): Job = jobsMap[findNameOfCurrent()] ?: error
 
     fun doWork() {
-        if (Stats.hungerStat - findCurrent().decreasedHunger >= 0) {
-            Stats.increaseHunger(-(findCurrent().decreasedHunger))
+        if (StatsObject.hungerStat - findCurrent().decreasedHunger >= 0) {
+            StatsObject.increaseHunger(-(findCurrent().decreasedHunger))
             Money.increase(findCurrent().payment)
         }
     }

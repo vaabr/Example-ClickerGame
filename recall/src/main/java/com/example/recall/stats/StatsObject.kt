@@ -1,21 +1,33 @@
-package com.example.recall
+package com.example.recall.stats
 
-object Stats {
+object StatsObject {
     var happinessStat = 100
     var hungerStat = 100
     var healthStat = 100
     var rentStat = 10
 
     fun increaseHappiness(x: Int) {
-        happinessStat = increaseStat(happinessStat, x)
+        happinessStat =
+            increaseStat(
+                happinessStat,
+                x
+            )
     }
 
     fun increaseHunger(x: Int) {
-        hungerStat = increaseStat(hungerStat, x)
+        hungerStat =
+            increaseStat(
+                hungerStat,
+                x
+            )
     }
 
     fun increaseHealth(x: Int) {
-        healthStat = increaseStat(healthStat, x)
+        healthStat =
+            increaseStat(
+                healthStat,
+                x
+            )
     }
 
     fun increaseRent(x: Int) {

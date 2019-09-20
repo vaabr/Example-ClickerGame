@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.recall.MainActivity
 import com.example.recall.R
-import com.example.recall.Stats
+import com.example.recall.stats.StatsObject
 import com.example.recall.databinding.FragmentFoodBinding
 import com.example.recall.money.Money
 
@@ -34,7 +34,7 @@ class FoodFragment : Fragment() {
 
         binding.bBuyFood.setOnClickListener {
             if (Money.amount > 0) {
-                Stats.increaseHunger(5)
+                StatsObject.increaseHunger(5)
                 Money.increase(-1)
                 (activity as MainActivity).updateCounters()
             }

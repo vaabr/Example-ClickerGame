@@ -11,19 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.recall.Functions.sPref
-import com.example.recall.Stats.formatHappiness
-import com.example.recall.Stats.formatHealth
-import com.example.recall.Stats.formatHunger
-import com.example.recall.Stats.formatRent
-import com.example.recall.fragments.cars.CarsFragment
 import com.example.recall.databinding.ActivityMainBinding
+import com.example.recall.fragments.apartments.ApartmentsFragment
+import com.example.recall.fragments.cars.CarsFragment
 import com.example.recall.fragments.fitness.FitnessFragment
 import com.example.recall.fragments.food.FoodFragment
-import com.example.recall.fragments.apartments.ApartmentsFragment
 import com.example.recall.fragments.main.MainFragment
-import com.example.recall.money.Money
-import com.example.recall.money.Money.format
-import com.example.recall.money.Money.increase
 import com.example.recall.fragments.settings.SettingsFragment
 import com.example.recall.fragments.shop.ShopFragment
 import com.example.recall.fragments.work.JobsObject.KEY_BEGGAR
@@ -31,8 +24,12 @@ import com.example.recall.fragments.work.JobsObject.KEY_JANITOR
 import com.example.recall.fragments.work.JobsObject.jobsMap
 import com.example.recall.fragments.work.WorkFragment
 import com.example.recall.log.L
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.recall.money.Money
+import com.example.recall.money.Money.format
+import com.example.recall.stats.StatsObject.formatHappiness
+import com.example.recall.stats.StatsObject.formatHealth
+import com.example.recall.stats.StatsObject.formatHunger
+import com.example.recall.stats.StatsObject.formatRent
 
 const val KEY_LASTCLICKED = "key_lastClicked"
 
@@ -83,8 +80,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun jobsInitialization() {
-        jobsMap[KEY_BEGGAR]!!.name = getString(R.string.tj_beggar).capitalize()
-        jobsMap[KEY_JANITOR]!!.name = getString(R.string.tj_janitor).capitalize()
+        jobsMap[KEY_BEGGAR]!!.apply {
+            name = getString(R.string.tj_beggar).capitalize()
+            iconID = R.drawable.ic_baseline_adb_24px //TODO("placeholder")
+        }
+        jobsMap[KEY_JANITOR]!!.apply {
+            name = getString(R.string.tj_janitor).capitalize()
+            iconID = R.drawable.ic_baseline_adb_24px //TODO("placeholder")
+        }
     }
 
     private fun menuButton(fragment: Fragment, button: View) {
@@ -125,7 +128,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun setFragment(fragment: Fragment) {
+    fun setFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_container, fragment)
             .commit()

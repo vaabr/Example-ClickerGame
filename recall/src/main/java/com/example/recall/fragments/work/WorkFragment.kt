@@ -18,6 +18,7 @@ import com.example.recall.fragments.work.JobsObject.loadCurrentJob
 import com.example.recall.fragments.work.JobsObject.findCurrent
 import com.example.recall.fragments.work.JobsObject.saveCurrentJob
 import com.example.recall.fragments.work.JobsObject.setCurrent
+import com.example.recall.fragments.work.findJob.FindJobFragment
 import com.example.recall.log.L
 
 class WorkFragment : Fragment() {
@@ -36,8 +37,8 @@ class WorkFragment : Fragment() {
             container,
             false
         )
-
         viewModel = ViewModelProviders.of(this).get(WorkViewModel::class.java)
+
         loadCurrentJob()
         initializeOnClickListeners()
         updateJobInfo()
@@ -45,17 +46,21 @@ class WorkFragment : Fragment() {
         return binding.root
     }
 
-    private fun initializeOnClickListeners(){
-        binding.bWork.setOnClickListener {
-            doWork()
-            (activity as MainActivity).updateCounters()
+    private fun initializeOnClickListeners() {
+        binding.apply {
+            bWork.setOnClickListener {
+                doWork()
+                (activity as MainActivity).updateCounters()
+            }
+            bFindJob.setOnClickListener {
+                (activity as MainActivity).setFragment(FindJobFragment())
+            }
         }
-
-        binding.bAsk.setOnClickListener {
+        /*binding.bAsk.setOnClickListener {
             if (findNameOfCurrent() == KEY_BEGGAR) setCurrent(KEY_JANITOR)
             else setCurrent(KEY_BEGGAR)
             updateJobInfo()
-        }
+        }*/
     }
 
     private fun updateJobInfo() {
