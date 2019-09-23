@@ -30,4 +30,5 @@
     <string name="workHeader">Your current job:</string>
     <string name="findJob">Find a Job</string>
     <string name="apply">apply</string>
+    <string name="dollars">%1%s$</string>
 </resources>
