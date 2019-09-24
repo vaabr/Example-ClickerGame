@@ -28,7 +28,6 @@ class JobListViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
     }
 
     fun bind(job: Job) {
-        mJobIcon?.setImageResource(job.iconID)
         mJobName?.text = job.name
         mJobDescription?.text = job.description
         mApply?.setOnClickListener { JobsObject.setCurrent(JobsObject.jobsMap.filterValues { it == job }.keys.first()) }
