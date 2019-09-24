@@ -5,24 +5,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ImageView
-            android:id="@+id/iv_jobIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
     <TextView
             android:id="@+id/tv_jobName"
             style="@style/text_stats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_mono_medium"
             android:text="@string/loading"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_jobIcon"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Beggar" />
 
@@ -30,7 +21,6 @@
             android:id="@+id/tv_salary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:text="@string/loading"
             android:textColor="#4CAF50"
             android:textSize="24sp"
@@ -41,8 +31,9 @@
     <TextView
             android:id="@+id/tv_jobDescription"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/loading"
             app:layout_constraintBottom_toTopOf="@+id/b_apply"
             app:layout_constraintEnd_toEndOf="@+id/tv_salary"
@@ -55,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/apply"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_jobIcon"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_salary"
             tools:text="Apply" />
 </androidx.constraintlayout.widget.ConstraintLayout>

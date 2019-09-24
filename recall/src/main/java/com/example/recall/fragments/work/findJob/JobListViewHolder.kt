@@ -15,14 +15,12 @@ class JobListViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         R.layout.jobslist_item, parent, false
     )
 ) {
-    private var mJobIcon: ImageView? = null
     private var mJobName: TextView? = null
     private var mJobDescription: TextView? = null
     private var mApply: Button? = null
     private var mSalary: TextView? = null
 
     init {
-        mJobIcon = itemView.findViewById(R.id.iv_jobIcon)
         mJobName = itemView.findViewById(R.id.tv_jobName)
         mJobDescription = itemView.findViewById(R.id.tv_jobDescription)
         mApply = itemView.findViewById(R.id.b_apply)
@@ -30,7 +28,6 @@ class JobListViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
     }
 
     fun bind(job: Job) {
-        mJobIcon?.setImageResource(job.iconID)
         mJobName?.text = job.name
         mJobDescription?.text = job.description
         mApply?.setOnClickListener { JobsObject.setCurrent(JobsObject.jobsMap.filterValues { it == job }.keys.first()) }
