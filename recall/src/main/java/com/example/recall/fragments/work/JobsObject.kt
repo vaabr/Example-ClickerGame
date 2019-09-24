@@ -15,7 +15,7 @@ object JobsObject {
     private val error = Job(0, "no job", "no job")
 
     val jobsMap = mapOf(KEY_ERROR to error, KEY_BEGGAR to beggar, KEY_JANITOR to janitor)
-    val arrayOfKeys = arrayListOf(KEY_BEGGAR, KEY_JANITOR)
+    val arrayOfKeys = arrayListOf(KEY_BEGGAR, KEY_JANITOR, KEY_ERROR)
 
     fun setCurrent(key: String) {
         jobsMap.forEach { (_, v) -> v.makeCurrent(false) }
